@@ -1,54 +1,33 @@
 #include "shell.h"
 
 /**
- * execute_command - Executes a command using execve.
- * @command: Command to execute.
+ * main - Entry point to simple shell.
  *
- * Return: None.
+ * Return: 0 (Success).
  */
-void execute_command(char *line)
+
+int main(void)
 {
-	char *token;
-	int i = 0, status;
-	pid_t child;
-	char **str;
+	char *line;
 
-	str = malloc(sizeof(char *) * 256);
-	if (str == NULL)
-	{
-		perror("malloc fail");
-		exit(EXIT_FAILURE);
-	}
-
-	token = strtok(line, " \n\t");
-	while (token != NULL)
-	{
-		str[i] = token;
-		token = strtok(NULL, " \n\t");
-		i++;
-	}
-	str[i] = NULL;
-
-
-	child = fork();
-	if (child == -1)
-	{
-		perror("Error forking");
-		free(str);
-		return;
-	}
-
-	if (child == 0)
-	{
-		if (execve(str[0], str, NULL) == -1)
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
+		line = read_line();
+		if (line == NULL)
 		{
-			perror("Error");
-			exit(EXIT_FAILURE);
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			break;
 		}
+
+		if (_strlen(line) == 0 || white_space(line))
+		{
+			free(line);
+			continue;
+		}
+
+		execute_command(line);
+		free(line);
 	}
-	else
-	{
-		wait(&status);
-		free(str);
-	}
+	return (0);
 }
