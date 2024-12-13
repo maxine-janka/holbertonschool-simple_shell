@@ -1,86 +1,54 @@
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <string.h>
+#include "shell.h"
 
 /**
- * main - Entry point
+ * execute_command - Executes a command using execve.
+ * @command: Command to execute.
  *
- * @argc: Number of arguments (void)
- * @argv: An array of arguments
- *
- * Return: 0 (success)
+ * Return: None.
  */
-
-int main(int argc, char *argv[])
+void execute_command(char *line)
 {
-	char *buffer = NULL;
-	size_t buff_size = 0;
-	ssize_t input;
-	(void)argc;
-	char **str;
-	int i = 0, status;
 	char *token;
+	int i = 0, status;
 	pid_t child;
-	int len;
+	char **str;
 
-	while (1)
+	str = malloc(sizeof(char *) * 256);
+	if (str == NULL)
 	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
-				
-		input = getline(&buffer, &buff_size, stdin);
-		
-		if (input == -1)
-		{
-			free(buffer);
-			exit(0);
-		}
-		len = strlen(buffer);
-		while (buffer[i] == ' ' || buffer[i] == '\n' || buffer[i] == '\t')
-		{
-			i++;
-		}
-		if (i == len)
-		{
-			continue;
-		}
+		perror("malloc fail");
+		exit(EXIT_FAILURE);
+	}
 
-		str = malloc(sizeof(char *) * 256);
-		
-		token = strtok(buffer, " \n\t");
+	token = strtok(line, " \n\t");
+	while (token != NULL)
+	{
+		str[i] = token;
+		token = strtok(NULL, " \n\t");
+		i++;
+	}
+	str[i] = NULL;
 
-		while (token != NULL)
-		{
-			str[i] = token;
-			token = strtok(NULL, " \n\t");
-			i++;
-		}
-		str[i] = NULL;
-		child = fork();
-		if (child == -1)
-		{
-			perror("error");
-			free(str);
-			exit (1);
-		}
 
-		if (child == 0)
+	child = fork();
+	if (child == -1)
+	{
+		perror("Error forking");
+		free(str);
+		return;
+	}
+
+	if (child == 0)
+	{
+		if (execve(str[0], str, NULL) == -1)
 		{
-			if (execve(str[0], str, NULL) == -1)
-				perror("error");
-				exit (1);
+			perror("Error");
+			exit(EXIT_FAILURE);
 		}
-		else
-		{
-			wait(&status);
-		}
-		i = 0;
+	}
+	else
+	{
+		wait(&status);
 		free(str);
 	}
-	free(buffer);
-	return (0);
 }
