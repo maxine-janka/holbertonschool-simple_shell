@@ -59,7 +59,7 @@ void execute_command(char *line)
 	}
 	if (child == 0)
 	{
-		if (execve(str[0], str, NULL) == -1)
+		if (execve(str[0], str, environ) == -1)
 		{
 			perror("Error");
 			free(str);
@@ -69,7 +69,6 @@ void execute_command(char *line)
 	else
 	{
 		wait(&status);
-		free(str);
 	}
 	free(str);
 }

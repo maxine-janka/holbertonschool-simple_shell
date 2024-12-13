@@ -8,6 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+extern char **environ;
+
 /*execute functions*/
 char *read_line(void);
 void execute_command(char *line);
