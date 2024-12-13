@@ -35,7 +35,7 @@ void execute_command(char *line)
 	pid_t child;
 	char **str;
 
-	str = malloc(sizeof(char *) * 256);
+	str = malloc(sizeof(char *) * 1024);
 	if (str == NULL)
 	{
 		perror("malloc fail");
@@ -62,6 +62,7 @@ void execute_command(char *line)
 		if (execve(str[0], str, NULL) == -1)
 		{
 			perror("Error");
+			free(str);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -70,4 +71,5 @@ void execute_command(char *line)
 		wait(&status);
 		free(str);
 	}
+	free(str);
 }
