@@ -11,13 +11,17 @@ int main(void)
 	char *line;
 
 		if (isatty(STDIN_FILENO))
+		{
 			write(STDOUT_FILENO, "$ ", 2);
+		}
 		line = read_line();
 		if (line == NULL)
 		{
 			if (isatty(STDIN_FILENO))
+			{
 				write(STDOUT_FILENO, "\n", 1);
 			break;
+			}
 		}
 
 		if (_strlen(line) == 0 || white_space(line))
