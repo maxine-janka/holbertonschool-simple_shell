@@ -7,6 +7,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <errno.h>
+
+extern char **environ;
 
 /*execute functions*/
 char *read_line(void);
