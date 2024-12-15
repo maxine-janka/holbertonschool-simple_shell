@@ -7,18 +7,15 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <errno.h>
-
-extern char **environ;
 
 extern char **environ;
 
 /*execute functions*/
 char *read_line(void);
-void execute_command(char *line);
+char **split_string(char *line);
+void child_process(char **str, char **environ);
 
 /*handle strings*/
 int _strlen(char *str);
-int white_space(const char *str);
 
 #endif
