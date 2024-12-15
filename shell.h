@@ -11,6 +11,8 @@
 
 extern char **environ;
 
+extern char **environ;
+
 /*execute functions*/
 char *read_line(void);
 void execute_command(char *line);
