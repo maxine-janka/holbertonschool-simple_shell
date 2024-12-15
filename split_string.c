@@ -28,5 +28,10 @@ char **split_string(char *line)
 	}
 	str[i] = NULL;
 
+	if (i == 0)
+	{
+		free(str);
+		return (NULL);
+	}
 	return (str);
 }

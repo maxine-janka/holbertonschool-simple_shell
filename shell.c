@@ -25,6 +25,11 @@ int main(void)
 		}
 
 		str = split_string(line);
+		if (str == NULL)
+		{
+			free(line);
+			continue;
+		}
 		child_process(str, environ);
 		free(line);
 	}
