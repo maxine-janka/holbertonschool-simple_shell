@@ -30,10 +30,12 @@ char *read_line(void)
  */
 void execute_command(char *line)
 {
-	char *token;
-	int i = 0, status;
+	int status;
 	pid_t child;
 	char **str;
+  char *args[2];
+	args[0] = line;
+	args[1] = NULL;
 
 	str = malloc(sizeof(char *) * 1024);
 	if (str == NULL)
@@ -54,12 +56,11 @@ void execute_command(char *line)
 	if (child == -1)
 	{
 		perror("Error forking");
-		free(str);
 		return;
 	}
 	if (child == 0)
 	{
-		if (execve(str[0], str, environ) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
 			perror("Error");
 			free(str);
