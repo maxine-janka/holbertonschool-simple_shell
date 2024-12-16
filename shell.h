@@ -22,6 +22,6 @@ void get_exit(char **str);
 
 /*handle strings*/
 int _strlen(char *str);
-int _isdigit (char c);
+int _atoi(char *s);
 
 #endif

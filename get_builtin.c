@@ -16,7 +16,7 @@ void get_exit(char **str)
 		free(str);
 		exit(EXIT_SUCCESS);
 	}
-	exit_code = atoi(str[1]);
+	exit_code = _atoi(str[1]);
 	free(str);
 	exit(exit_code);
 }
