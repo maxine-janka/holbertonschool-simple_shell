@@ -15,6 +15,10 @@ char *read_line(void);
 char **split_string(char *line);
 void child_process(char **str, char **environ);
 
+/*get_built in functions*/
+int get_builtin(char **str, char **env);
+int print_env(char **str);
+
 /*handle strings*/
 int _strlen(char *str);
 
