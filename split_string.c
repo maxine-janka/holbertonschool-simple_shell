@@ -16,22 +16,13 @@ char **split_string(char *line)
 	if (str == NULL)
 	{
 		perror("malloc fail");
-		return (NULL);
+		free(str);
+		exit(EXIT_FAILURE);
 	}
 	token = strtok(line, " \n\t");
 	while (token != NULL)
 	{
-		str[i] = strdup(token);
-		if (str[i] == NULL)
-		{
-			perror("malloc fail");
-			while (i > 0)
-			{
-				free(str[--i]);
-			}
-			free(str);
-			return (NULL);
-		}
+		str[i] = token;
 		token = strtok(NULL, " \n\t");
 		i++;
 	}
