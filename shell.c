@@ -9,6 +9,7 @@
 int main(void)
 {
 	char *line, **str;
+	int check_builtin;
 
 	while (1)
 	{
@@ -30,6 +31,10 @@ int main(void)
 			free(line);
 			continue;
 		}
+		check_builtin = get_builtin(str, environ);
+		if (check_builtin == 1)
+			continue;
+
 		child_process(str, environ);
 		free(line);
 	}
