@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
 
 extern char **environ;
 
@@ -22,8 +21,5 @@ int print_env(char **str);
 
 /*handle strings*/
 int _strlen(char *str);
-
-/*helper functions*/
-char *resolve_command(char *command);
 
 #endif
