@@ -24,17 +24,15 @@ int print_env(char **str)
  *
  * @str: A pointer to an array of commands from strtok.
  * @environ: A pointer to an array that lists environment variables.
- * @line: pointer to string (user input)
  *
  * Return: 0 on success.
  */
 
-int get_builtin(char **str, char **environ, char *line)
+int get_builtin(char **str, char **environ)
 {
 	if (strcmp(str[0], "exit") == 0)
 	{
 		free(str);
-		free(line);
 		exit(0);
 	}
 	else if (strcmp(str[0], "env") == 0)
