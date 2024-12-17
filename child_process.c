@@ -13,6 +13,18 @@ void child_process(char **str, char **environ)
 {
 	pid_t child;
 	int status;
+	char *path_cmd = str[0];
+
+	if (path_cmd[0] != '/')
+	{
+		path_cmd = get_path(str[0]);
+		if (path_cmd == NULL)
+		{
+			perror("Command not found");
+			free(str);
+			exit(EXIT_FAILURE);
+		}
+	}
 
 	child = fork();
 	if (child == -1)
@@ -23,14 +35,16 @@ void child_process(char **str, char **environ)
 	}
 	if (child == 0)
 	{
-		if (execve(str[0], str, environ) == -1)
+		if (execve(path_cmd, str, environ) == -1)
 		{
-			perror("Error");
+			perror("Error executing command");
 			free(str);
 			exit(EXIT_FAILURE);
 		}
 	}
-		else
-			wait(&status);
-		free(str);
+	else
+	{
+	wait(&status);
+	}
+	free(str);
 }
