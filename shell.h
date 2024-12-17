@@ -15,9 +15,10 @@ char *read_line(void);
 char **split_string(char *line);
 void child_process(char **str, char **environ);
 char *get_path(char *cmd);
+char *resolve_command(char *cmd);
 
 /*get_built in functions*/
-int get_builtin(char **str, char **env);
+int get_builtin(char **str, char **env, char *line);
 int print_env(char **str);
 
 /*handle strings*/

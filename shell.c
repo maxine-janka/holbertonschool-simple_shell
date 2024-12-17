@@ -31,10 +31,11 @@ int main(void)
 			free(line);
 			continue;
 		}
-		check_builtin = get_builtin(str, environ);
+		check_builtin = get_builtin(str, environ, line);
 		if (check_builtin == 1)
+		{
 			continue;
-
+		}
 		child_process(str, environ);
 		free(line);
 	}

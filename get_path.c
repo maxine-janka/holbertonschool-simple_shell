@@ -7,14 +7,32 @@
  */
 char *get_path(char *cmd)
 {
-	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
-	char *dir = strtok(path_copy, ":");
+	char *path;
+	char *path_copy;
+	char *dir;
+	char *full_path;
 
+	path = getenv("PATH");
+	if (!path)
+	{
+		return (NULL);
+	}
+	path_copy = strdup(path);
+	if (!path_copy)
+	{
+		perror("Error");
+		return (NULL);
+	}
+	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
-		char *full_path = malloc(strlen(dir) + strlen(cmd) + 2);
-
+		full_path = malloc(strlen(dir) + strlen(cmd) + 2);
+		if (!full_path)
+		{
+			perror("Error");
+			free(path_copy);
+			return (NULL);
+		}
 		sprintf(full_path, "%s/%s", dir, cmd);
 		if (access(full_path, X_OK) == 0)
 		{
