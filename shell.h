@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 extern char **environ;
 
@@ -14,6 +15,7 @@ extern char **environ;
 char *read_line(void);
 char **split_string(char *line);
 void child_process(char **str, char **environ);
+char *get_path(char *command);
 
 /*get_built in functions*/
 int get_builtin(char **str, char **env);
