@@ -8,8 +8,7 @@
 
 int main(void)
 {
-	char *line, **str;
-	int check_builtin;
+	char *line, **str = NULL;
 
 	while (1)
 	{
@@ -31,12 +30,36 @@ int main(void)
 			free(line);
 			continue;
 		}
-		check_builtin = get_builtin(str, environ);
-		if (check_builtin == 1)
+		if (strcmp(str[0], "exit") == 0)
+		{	
+			exit (0);
+		}
+		if (strcmp(str[0], "env") == 0)
+		{
+			print_env(environ);
 			continue;
+		}
 
 		child_process(str, environ);
 		free(line);
 	}
 	return (0);
+}
+/**
+ * print_env - Prints the current environment.
+ *
+ * @str: A pointer to the array from strtok with the command.
+ *
+ * Return: 0;
+ */
+int print_env(char **environ)
+{
+        int i = 0;
+
+        while (environ[i] != NULL)
+        {
+                printf("%s\n", environ[i]);
+                i++;
+        }
+        return (0);
 }
