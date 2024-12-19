@@ -1,6 +1,27 @@
 #include "shell.h"
 
 /**
+ * _getenv - retrieves the value of an environment variable
+ * @name: the name of the environment variable to retrieve
+ * Return: value of the environment variable, or NULL
+ */
+char *_getenv(const char *name)
+{
+	int i = 0;
+	size_t name_len = strlen(name);
+
+	while (environ[i] != NULL)
+	{
+		if (strncmp(environ[i], name, name_len) == 0 && environ[i][name_len] == '=')
+		{
+			return (environ[i] + name_len + 1);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+/**
  * allocate_file_path - allocates and constructs file path
  * @path_token: A directory from PATH
  * @command: command to append
@@ -33,7 +54,7 @@ char *get_path(char *command)
 	char *path, *path_copy, *path_token, *file_path;
 	struct stat buffer;
 
-	path = getenv("PATH");
+	path =  _getenv("PATH");
 
 	if (path)
 	{
