@@ -18,19 +18,22 @@ void child_process(char **str, char **environ)
 	if (child == -1)
 	{
 		perror("Error forking");
-		free(str);
 		return;
 	}
 	if (child == 0)
 	{
 		if (execve(str[0], str, environ) == -1)
 		{
-			perror("Error");
-			free(str);
+			perror("Execve failed");
 			exit(EXIT_FAILURE);
 		}
 	}
-		else
-			wait(&status);
-		free(str);
+	else
+	{
+		wait(&status);
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		{
+			fprintf(stderr, "Child process exit status %d\n", WEXITSTATUS(status));
+		}
+	}
 }
