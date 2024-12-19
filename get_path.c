@@ -40,6 +40,7 @@ char *get_path(char *command)
 		path_copy = strdup(path);
 		if (!path_copy)
 		{
+			perror("Memory allocation failed");
 			return (NULL);
 		}
 		path_token = strtok(path_copy, ":");

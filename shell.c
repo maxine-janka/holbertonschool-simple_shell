@@ -74,6 +74,7 @@ int main(void)
 			continue;
 		}
 		str = split_string(line);
+		free(line);
 		if (str == NULL)
 		{
 			continue;

@@ -24,6 +24,7 @@ char **split_string(char *line)
 		str[i] = strdup(token);
 		if (!str[i])
 		{
+			perror("malloc fail");
 			free_str_array(str);
 			return (NULL);
 		}
