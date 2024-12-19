@@ -3,17 +3,17 @@
 /**
  * print_env - Prints the current environment.
  *
- * @str: A pointer to the array from strtok with the command.
+ * @environ: A pointer to the array that lists environ variables.
  *
- * Return: 0;
+ * Return: 0 on success.
  */
-int print_env(char **str)
+int print_env(char **environ)
 {
 	int i = 0;
 
-	while (str[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		printf("%s\n", str[i]);
+		printf("%s\n", environ[i]);
 		i++;
 	}
 	return (0);
@@ -27,7 +27,6 @@ int print_env(char **str)
  *
  * Return: 0 on success.
  */
-
 int get_builtin(char **str, char **environ)
 {
 	if (strcmp(str[0], "exit") == 0)
