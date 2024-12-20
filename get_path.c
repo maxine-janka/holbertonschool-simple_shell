@@ -45,47 +45,72 @@ char *allocate_file_path(const char *path_token, const char *command)
 }
 
 /**
+ * search_in_path - search for command in PATH
+ * @path: PATH directories
+ * @command: command being searhed for
+ * Return: file path, otherwise NULL
+ */
+char *search_in_path(char *path, char *command)
+{
+	char *path_copy, *path_token, *file_path;
+	struct stat buffer;
+
+	path_copy = strdup(path);
+	if (!path_copy)
+	{
+		perror("Memory allocation failed");
+		return (NULL);
+	}
+	path_token = strtok(path_copy, ":");
+	while (path_token != NULL)
+	{
+		file_path = allocate_file_path(path_token, command);
+		if (!file_path)
+		{
+			free(path_copy);
+			return (NULL);
+		}
+		if (stat(file_path, &buffer) == 0)
+		{
+			free(path_copy);
+			return (file_path);
+		}
+		free(file_path);
+		path_token = strtok(NULL, ":");
+	}
+	free(path_copy);
+	return (NULL);
+}
+
+/**
  * get_path - search PATH for command
  * @command: The command
  * Return: command, otherwise NULL
  */
 char *get_path(char *command)
 {
-	char *path, *path_copy, *path_token, *file_path;
+	char *path;
 	struct stat buffer;
+	char *resolved_path;
 
 	path =  _getenv("PATH");
 
-	if (path)
+	if (!path || *path == '\0')
 	{
-		path_copy = strdup(path);
-		if (!path_copy)
-		{
-			perror("Memory allocation failed");
-			return (NULL);
-		}
-		path_token = strtok(path_copy, ":");
-		while (path_token != NULL)
-		{
-			file_path = allocate_file_path(path_token, command);
-			if (!file_path)
-			{
-				free(path_copy);
-				return (NULL);
-			}
-			if (stat(file_path, &buffer) == 0)
-			{
-				free(path_copy);
-				return (file_path);
-			}
-			free(file_path);
-			path_token = strtok(NULL, ":");
-		}
-		free(path_copy);
 		if (stat(command, &buffer) == 0)
 		{
 			return (strdup(command));
 		}
+		return (NULL);
+	}
+	resolved_path = search_in_path(path, command);
+	if (resolved_path)
+	{
+		return (resolved_path);
+	}
+	if (stat(command, &buffer) == 0)
+	{
+		return (strdup(command));
 	}
 	return (NULL);
 }
