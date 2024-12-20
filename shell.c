@@ -20,7 +20,17 @@ void display_prompt(void)
 int resolve_command_path(char **str)
 {
 	char *command_path;
+	char *path = _getenv("PATH");
 
+	if (!path || *path == '\0')
+	{
+		if (access(str[0], X_OK) == 0)
+		{
+			return (1);
+		}
+		fprintf(stderr, "Command not found: %s\n", str[0]);
+		return (0);
+	}
 	command_path = get_path(str[0]);
 	if (command_path == NULL)
 	{
@@ -63,6 +73,10 @@ int main(void)
 	char *line = NULL, **str = NULL;
 	int check_builtin;
 
+	if (!_getenv("PATH"))
+	{
+		setenv("PATH", "/bin:/usr/bin", 1);
+	}
 	while (1)
 	{
 

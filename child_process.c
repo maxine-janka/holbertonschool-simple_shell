@@ -22,7 +22,11 @@ void child_process(char **str, char **environ)
 	}
 	if (child == 0)
 	{
-		if (execve(str[0], str, environ ? environ : NULL) == -1)
+		if (!environ || !*environ)
+		{
+			environ = NULL;
+		}
+		if (execve(str[0], str, environ) == -1)
 		{
 			perror("Execve failed");
 			exit(EXIT_FAILURE);
