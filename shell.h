@@ -23,6 +23,8 @@ int resolve_command_path(char **str);
 void free_str_array(char **str);
 char *allocate_file_path(const char *path_token, const char *command);
 char *search_in_path(char *path, char *command);
+char *_getenv(const char *name);
+int is_number(char *str);
 
 /*get_built in functions*/
 int get_builtin(char **str, char **env);
