@@ -19,27 +19,16 @@ void display_prompt(void)
  */
 int resolve_command_path(char **str)
 {
-	char *resolved_path = malloc(PATH_MAX);
+	char *command_path;
 
-	if (!resolved_path)
+	command_path = get_path(str[0]);
+	if (command_path == NULL)
 	{
-		perror("malloc");
-		return (0);
-	}
-	if (realpath(str[0], resolved_path) == NULL)
-	{
-		free(resolved_path);
 		fprintf(stderr, "Command not found: %s\n", str[0]);
 		return (0);
 	}
-	if (access(resolved_path, X_OK) != 0)
-	{
-		free(resolved_path);
-		fprintf(stderr, "Command not executable: %s\n", str[0]);
-		return (0);
-	}
 	free(str[0]);
-	str[0] = resolved_path;
+	str[0] = command_path;
 	return (1);
 }
 
