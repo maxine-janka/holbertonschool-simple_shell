@@ -3,48 +3,20 @@
 /**
  * print_env - Prints the current environment.
  *
- * @environ: A pointer to the environ.
+ * @str: A pointer to the array from strtok with the command.
  *
  * Return: 0;
  */
-int print_env(char **environ)
+int print_env(char **str)
 {
 	int i = 0;
 
-	while (environ[i] != NULL)
+	while (str[i] != NULL)
 	{
-		printf("%s\n", environ[i]);
+		printf("%s\n", str[i]);
 		i++;
 	}
 	return (0);
-}
-
-/**
- * is_number - check string represents valid number
- * @str: string being checked
- * Return: 1 string valid number, else 0
- */
-int is_number(char *str)
-{
-	int i = 0;
-
-	if (str == NULL || *str == '\0')
-	{
-		return (0);
-	}
-	while (str[i] == ' ')
-	{
-		i++;
-	}
-	while (str[i] != '\0')
-	{
-		if (str[i] < '0' || str[i] > '9')
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (1);
 }
 
 /**
@@ -60,29 +32,13 @@ int get_builtin(char **str, char **environ)
 {
 	if (strcmp(str[0], "exit") == 0)
 	{
-		if (str[1] != NULL)
-		{
-			if (is_number(str[1]))
-			{
-				int status = atoi(str[1]);
-
-				exit(status);
-			}
-			else
-			{
-				fprintf(stderr, "exit: %s: numeric argument required\n", str[1]);
-				exit(0);
-			}
-		}
-		else
-		{
-			exit(0);
-		}
+		free(str);
+		exit(0);
 	}
 	else if (strcmp(str[0], "env") == 0)
 	{
 		print_env(environ);
-		free_str_array(str);
+		free(str);
 		return (1);
 	}
 	return (0);
