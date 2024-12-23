@@ -19,7 +19,19 @@ void display_prompt(void)
  */
 int resolve_command_path(char **str)
 {
-	char *command_path;
+	char *command_path = NULL;
+	struct stat buffer;
+
+	if (str[0][0] == '/' || strncmp(str[0], "./", 2)
+		== 0 || strncmp(str[0], "../", 3) == 0)
+	{
+		if (stat(str[0], &buffer) == 0)
+		{
+			return (1);
+		}
+		fprintf(stderr, "%s: Command not found\n", str[0]);
+		return (0);
+	}
 
 	command_path = get_path(str[0]);
 	if (command_path == NULL)
