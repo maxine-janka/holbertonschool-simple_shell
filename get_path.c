@@ -93,24 +93,21 @@ char *get_path(char *command)
 	struct stat buffer;
 	char *resolved_path;
 
+	if (!command || *command == '\0' || stat(command, &buffer) == 0)
+	{
+		return (strdup(command));
+	}
+
 	path =  _getenv("PATH");
 
 	if (!path || *path == '\0')
 	{
-		if (stat(command, &buffer) == 0)
-		{
-			return (strdup(command));
-		}
 		return (NULL);
 	}
 	resolved_path = search_in_path(path, command);
 	if (resolved_path)
 	{
 		return (resolved_path);
-	}
-	if (stat(command, &buffer) == 0)
-	{
-		return (strdup(command));
 	}
 	return (NULL);
 }
