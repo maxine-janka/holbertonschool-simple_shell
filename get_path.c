@@ -93,9 +93,13 @@ char *get_path(char *command)
 	struct stat buffer;
 	char *resolved_path;
 
-	if (!command || *command == '\0' || stat(command, &buffer) == 0)
+	if (command[0] == '/' || command[0] == '.')
 	{
-		return (strdup(command));
+		if (stat(command, &buffer) == 0)
+		{
+			return (strdup(command));
+		}
+		return (NULL);
 	}
 
 	path =  _getenv("PATH");
@@ -108,6 +112,10 @@ char *get_path(char *command)
 	if (resolved_path)
 	{
 		return (resolved_path);
+	}
+	if (stat(command, &buffer) == 0)
+	{
+		return (strdup(command));
 	}
 	return (NULL);
 }
