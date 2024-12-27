@@ -26,7 +26,7 @@ char *search_in_path(char *path, char *command);
 
 /*get_built in functions*/
 int get_builtin(char **str, char **env);
-int print_env(char **str);
+int print_env(char **environ);
 
 /*handle strings*/
 int _strlen(char *str);

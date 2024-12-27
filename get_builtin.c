@@ -7,13 +7,13 @@
  *
  * Return: 0;
  */
-int print_env(char **str)
+int print_env(char **environ)
 {
 	int i = 0;
 
-	while (str[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		printf("%s\n", str[i]);
+		printf("%s\n", environ[i]);
 		i++;
 	}
 	return (0);
@@ -47,7 +47,7 @@ int get_builtin(char **str, char **environ)
 	else if (strcmp(str[0], "env") == 0)
 	{
 		print_env(environ);
-		free(str);
+		free_str_array(str);
 		return (1);
 	}
 	return (0);
