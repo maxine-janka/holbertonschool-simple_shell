@@ -24,8 +24,8 @@ void child_process(char **str, char **environ)
 	{
 		if (execve(str[0], str, environ ? environ : NULL) == -1)
 		{
-			perror("Execve failed");
-			exit(EXIT_FAILURE);
+			fprintf(stderr, "%s: %d: %s: not found\n", "./hsh", 1, str[0]);
+			exit(2);
 		}
 	}
 	else
@@ -33,7 +33,7 @@ void child_process(char **str, char **environ)
 		wait(&status);
 		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
-			fprintf(stderr, "Child process exit status %d\n", WEXITSTATUS(status));
+			fprintf(stderr, "%s: %d: %s: not found\n", "./hsh", 1, str[0]);
 		}
 	}
 }
