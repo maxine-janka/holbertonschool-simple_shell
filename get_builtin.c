@@ -32,8 +32,17 @@ int get_builtin(char **str, char **environ)
 {
 	if (strcmp(str[0], "exit") == 0)
 	{
-		free(str);
-		exit(0);
+		if (str[1] == NULL)
+		{
+			free_str_array(str);
+			exit(0);
+		}
+		else
+		{
+			fprintf(stderr, "./hsh: exit: too many arguments\n");
+			free_str_array(str);
+			return (1);
+		}
 	}
 	else if (strcmp(str[0], "env") == 0)
 	{

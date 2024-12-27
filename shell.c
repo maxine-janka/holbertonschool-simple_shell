@@ -39,9 +39,9 @@ int resolve_command_path(char **str)
  */
 void free_str_array(char **str)
 {
-	int i = 0;
+	size_t i = 0;
 
-	if (!str)
+	if (str == NULL)
 	{
 		return;
 	}
@@ -80,13 +80,12 @@ int main(void)
 		{
 			continue;
 		}
-		if (!resolve_command_path(str))
-		{
-			free_str_array(str);
-			continue;
-		}
 		check_builtin = get_builtin(str, environ);
 		if (check_builtin == 1)
+		{
+			continue;
+		}
+		if (!resolve_command_path(str))
 		{
 			free_str_array(str);
 			continue;
