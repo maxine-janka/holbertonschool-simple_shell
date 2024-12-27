@@ -24,20 +24,16 @@ void child_process(char **str, char **environ)
 	{
 		if (execve(str[0], str, environ ? environ : NULL) == -1)
 		{
-			perror("str[0]");
-			exit(errno);
+			perror("Execve failed");
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		wait(&status);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
-			if (WEXITSTATUS(status) != 0)
-			{
-				fprintf(stderr, "Child process exit status %d\n", WEXITSTATUS(status));
-				exit(WEXITSTATUS(status));
-			}
+			fprintf(stderr, "Child process exit status %d\n", WEXITSTATUS(status));
 		}
 	}
 }
