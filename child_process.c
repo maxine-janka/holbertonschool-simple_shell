@@ -24,7 +24,7 @@ void child_process(char **str, char **environ)
 	{
 		if (execve(str[0], str, environ ? environ : NULL) == -1)
 		{
-			fprintf(stderr, "%s: %d: %s: not found\n", "./hsh", 1, str[0]);
+			fprintf(stderr, "%s: %s: %s\n", str[0], "cannot access", str[1]);
 			exit(2);
 		}
 	}
