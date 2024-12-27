@@ -35,7 +35,7 @@ int get_builtin(char **str, char **environ)
 		if (str[1] == NULL)
 		{
 			free_str_array(str);
-			exit(0);
+			exit(errno);
 		}
 		else
 		{
