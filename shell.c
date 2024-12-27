@@ -24,7 +24,7 @@ int resolve_command_path(char **str)
 	command_path = get_path(str[0]);
 	if (command_path == NULL)
 	{
-		fprintf(stderr, "./hsh: 1: %s: not found\n", str[0]);
+		fprintf(stderr, "%s: 1: %s: not found\n", "./hsh", str[0]);
 		free_str_array(str);
 		exit(127);
 	}
