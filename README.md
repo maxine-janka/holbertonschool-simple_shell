@@ -1,10 +1,9 @@
-
 <div align="center">
-	<img width="468" alt="Simple_Shell_Terminal_Font" src="https://github.com/user-attachments/assets/8a977e86-c273-49d0-a1cb-088f84974cf3" />
+	<img width="841" alt="Simple_Shell_Terminal_Font" src="https://github.com/user-attachments/assets/da4d0a90-def6-406d-be53-213d8b6e8db0" />
 </div>
 
-## 📝Description
-Simple shell is a custom program that replicates some simple features of the UNIX shell originally built by Ken Thompson. 
+## Description
+Simple shell is a custom program that replicates basic features of the UNIX shell originally built by Ken Thompson. 
 It was completed as part of a group project for Holberton School Australia.
 
 ## Requirements
@@ -13,18 +12,20 @@ It was completed as part of a group project for Holberton School Australia.
 - No more than 5 functions per file.
 
 ## Features
-- Supports interactive annd non-interactive mode
+- Supports interactive and non-interactive mode
 - Handles basic errors
 - Custom built-in functions:
 	- `env` exits the shell
-	- `exit`prints the current environment
+	- `exit` prints the current environment
 - Executes commands using the `$PATH` environment variable
 
 ## Compilation
 - All files were compiled on Ubuntu 20.04 ITS gcc version 11.40
 - All .c files with the shell.c file were compiled this way:
-  <br /><br />
-  `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c`
+  <br />
+  ```
+  gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+  ```
 
 ## File Contents
 | File | Description |
@@ -38,10 +39,35 @@ It was completed as part of a group project for Holberton School Australia.
 |child_process.c| A Function that creates a child process and executes a program|
 
 ## Usage
-Interactive mode:
 
-Non-interactive mode:
+<b> Interactive mode</b>
 
-## Authors
+When the executable file is run and the standard input is connected to a terminal, an interactive shell is invoked.
+The program will display a prompt and allow the user the enter a command. To close the shell, the user can use the built-in command `exit`.
+```
+./hsh
+$ ls
+$ shell.c shell.h
+$
+$ exit
+```
+
+<b>Non-interactive mode</b>
+
+If the program is invoked with the standard input not connected to a terminal, the user can use the program in non-interactive mode
+```
+$ echo "ls" | ./hsh
+$ shell.c shell.h
+$
+```
+
+
+
+
+## Control Flow Diagram
+
+
+## 👋 Authors
 Crystal Caroll
+<br />
 Maxine Janka
