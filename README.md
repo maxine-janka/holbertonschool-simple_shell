@@ -3,7 +3,7 @@
 </div>
 
 ## Description
-Simple shell is a custom program that replicates basic features of the UNIX shell originally built by Ken Thompson. 
+Simple shell is a custom program that replicates basic features of the UNIX shell, originally built by Ken Thompson. 
 It was completed as part of a group project for Holberton School Australia.
 
 ## Requirements
@@ -51,7 +51,6 @@ $ shell.c shell.h
 $
 $ exit
 ```
-
 <b>Non-interactive mode</b>
 
 If the program is invoked with the standard input not connected to a terminal, the user can use the program in non-interactive mode
@@ -60,9 +59,15 @@ $ echo "ls" | ./hsh
 $ shell.c shell.h
 $
 ```
-
-
-
+<b>Output Examples</b>
+| Interactive & Non Interactive Commands | Ouput |
+|---------|-------|
+|`ls` <br /> `echo "ls" \| ./hsh` | Lists the contents of the current directory|
+|`ls -l` <br /> `echo "ls -l" \| ./hsh`  | List the contents of the current directory in long list format|
+|`pwd` <br /> `echo "pwd" \| ./hsh`| Print the current working directory|
+|`cat` <br /> `echo "cat" \| ./hsh` | Read the contents of a file|
+|`less` <br /> `echo "less" \| ./hsh` | Displays the file contents, one screen at a time|
+|`env` <br /> `echo "env" \| ./hsh` | Prints the current environment |
 
 ## Control Flow Diagram
 
