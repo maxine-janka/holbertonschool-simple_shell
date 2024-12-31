@@ -8,8 +8,8 @@ It was completed as part of a group project for Holberton School Australia.
 
 ## Requirements
 - Allowed editors: vi, vim, emacs
-- All code was written in Betty Style.
-- No more than 5 functions per file.
+- All code was written in <a href="https://github.com/alx-tools/Betty/wiki">Betty Style</a>
+- No more than 5 functions per file
 
 ## Features
 - Supports interactive and non-interactive mode
