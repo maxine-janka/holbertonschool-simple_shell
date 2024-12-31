@@ -16,14 +16,15 @@ It was completed as part of a group project for Holberton School Australia.
 - Suports interactive annd non-interactive mode
 - Handles basic errors
 - Custom built-in functions:
-	- ```env``` exits the shell
-	- ```exit```prints the current environment
+	- `env` exits the shell
+	- `exit`prints the current environment
 - Executes commands using the $PATH environment variable
 
 ## Compilation
 - All files were compiled on Ubuntu 20.04 ITS gcc version 11.40
 - All .c files with the shell.c file were compiled this way:
-```gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c```
+  \n
+  `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c`
 
 ## File Contents
 | File | Description |
