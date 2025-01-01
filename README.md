@@ -74,6 +74,6 @@ $
 
 
 ## Authors
-Crystal Caroll
+Crystal Carroll
 <br />
 Maxine Janka

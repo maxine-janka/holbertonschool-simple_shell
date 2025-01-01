@@ -1,0 +1,51 @@
+.TH HSH 1 2025-01-02 GNU Simple Shell User Manual
+
+.SH NAME
+.B hsh \- Simple UNIX command-line interpreter
+
+.SH SYNOPSIS
+.B ./hsh [command] [options]
+
+.SH DESCRIPTION
+hsh is a custom UNIX command-line interpreter that reads and executes commands
+from the standard input or from a file. It's functionality is limited to the
+built-in commands 'env' and 'exit' and those found in the global environment
+variable $PATH.
+hsh was developed on Ubuntu 20.04 ITS and compiled with gcc version 11.40. 
+
+.SH INVOCATION
+hsh can be used in both interaction and non-interactive mode:
+
+.IP Interactive mode
+To invoke hsh in interactive mode run the executable file using -./hsh.
+Commands can then be input directly into the command line using the 
+following syntax:
+
+[command][flag][argument]
+
+.IP Non-interactive mode
+To invoke hsh non-interactively, use the following syntax:
+
+[command][flag][argument] | ./hsh
+
+.SH BUILT-IN COMMANDS
+hsh supports the following built-in commands:
+
+.IP exit
+- Exits the program.
+
+.IP env
+- Prints the current environment. 
+
+.SH SEE ALSO
+bash(1), sh(1)
+
+.SH BUGS
+No known bugs.
+If bugs found please contact the authors. 
+
+.SH AUTHORS
+Crystal Carroll, Maxine Janka
+
+.SH COPYRIGHT
+hsh was created for educational purposes only.
