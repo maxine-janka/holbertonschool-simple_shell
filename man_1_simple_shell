@@ -4,7 +4,7 @@
 .B hsh \- Simple UNIX command-line interpreter
 
 .SH SYNOPSIS
-.B ./hsh [command] [options]
+.B ./hsh [command] [flags]
 
 .SH DESCRIPTION
 hsh is a custom UNIX command-line interpreter that reads and executes commands
@@ -21,12 +21,12 @@ To invoke hsh in interactive mode run the executable file using -./hsh.
 Commands can then be input directly into the command line using the 
 following syntax:
 
-[command][flag][argument]
+[command] [flags] [argument]
 
 .IP Non-interactive mode
 To invoke hsh non-interactively, use the following syntax:
 
-[command][flag][argument] | ./hsh
+[command] [flag] [argument] | ./hsh
 
 .SH BUILT-IN COMMANDS
 hsh supports the following built-in commands:
