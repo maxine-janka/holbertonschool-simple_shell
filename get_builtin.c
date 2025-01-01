@@ -28,14 +28,14 @@ int print_env(char **environ)
  * Return: 0 on success.
  */
 
-int get_builtin(char **str, char **environ)
+int get_builtin(char **str, char **environ, int *exit_status)
 {
 	if (strcmp(str[0], "exit") == 0)
 	{
 		if (str[1] == NULL)
 		{
 			free_str_array(str);
-			exit(0);
+			exit(*exit_status);
 		}
 		else
 		{
