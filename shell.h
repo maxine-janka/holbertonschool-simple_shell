@@ -14,7 +14,7 @@ extern char **environ;
 /*execute functions*/
 char *read_line(void);
 char **split_string(char *line);
-void child_process(char **str, char **environ);
+int child_process(char **str, char **environ);
 char *get_path(char *command);
 
 /*helper functions*/

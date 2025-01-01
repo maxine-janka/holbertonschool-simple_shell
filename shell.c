@@ -25,8 +25,7 @@ int resolve_command_path(char **str)
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: 1: %s: not found\n", "./hsh", str[0]);
-		free_str_array(str);
-		exit(127);
+		return (0);
 	}
 	free(str[0]);
 	str[0] = command_path;
@@ -87,10 +86,16 @@ int main(void)
 		}
 		if (!resolve_command_path(str))
 		{
+			exit_status = 127;
 			free_str_array(str);
 			continue;
 		}
-		child_process(str, environ);
+		exit_status = child_process(str, environ);
+		if (exit_status != 0)
+		{
+			fprintf(stderr, "Execution error");
+
+		}
 		free_str_array(str);
 	}
 	return (0);
