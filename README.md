@@ -70,6 +70,7 @@ $
 |`env` <br /> `echo "env" \| ./hsh` | Prints the current environment |
 
 ## Control Flow Diagram
+<img width="1014" alt="Simple_shell_control_flow_diagram" src="https://github.com/user-attachments/assets/9124f92f-9399-444c-9bea-1b02c53b7dfe" />
 
 
 ## 👋 Authors
