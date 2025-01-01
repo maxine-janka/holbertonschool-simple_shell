@@ -62,7 +62,7 @@ void free_str_array(char **str)
 int main(void)
 {
 	char *line = NULL, **str = NULL;
-	int check_builtin;
+	int check_builtin, exit_status = 0;
 
 	while (1)
 	{
@@ -80,7 +80,7 @@ int main(void)
 		{
 			continue;
 		}
-		check_builtin = get_builtin(str, environ);
+		check_builtin = get_builtin(str, environ, &exit_status);
 		if (check_builtin == 1)
 		{
 			continue;

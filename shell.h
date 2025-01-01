@@ -25,7 +25,7 @@ char *allocate_file_path(const char *path_token, const char *command);
 char *search_in_path(char *path, char *command);
 
 /*get_built in functions*/
-int get_builtin(char **str, char **env);
+int get_builtin(char **str, char **environ, int *exit_status);
 int print_env(char **environ);
 
 /*handle strings*/
