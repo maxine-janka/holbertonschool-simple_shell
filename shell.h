@@ -14,7 +14,7 @@ extern char **environ;
 /*execute functions*/
 char *read_line(void);
 char **split_string(char *line);
-int child_process(char **str, char **environ);
+void child_process(char **str, char **environ);
 char *get_path(char *command);
 
 /*helper functions*/
@@ -25,7 +25,7 @@ char *allocate_file_path(const char *path_token, const char *command);
 char *search_in_path(char *path, char *command);
 
 /*get_built in functions*/
-int get_builtin(char **str, char **environ, int *exit_status);
+int get_builtin(char **str, char **env);
 int print_env(char **environ);
 
 /*handle strings*/
