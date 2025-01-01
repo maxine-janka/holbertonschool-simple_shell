@@ -6,10 +6,10 @@
  * @str: A pointer to an array (commands).
  * @environ: Environment variables.
  *
- * Return: 1 on error.
+ * Return: Nothing.
  */
 
-int child_process(char **str, char **environ)
+void child_process(char **str, char **environ)
 {
 	pid_t child;
 	int status;
@@ -18,31 +18,22 @@ int child_process(char **str, char **environ)
 	if (child == -1)
 	{
 		perror("Error forking");
-		return (1);
+		return;
 	}
-	else if (child == 0)
+	if (child == 0)
 	{
 		if (execve(str[0], str, environ ? environ : NULL) == -1)
 		{
 			perror(str[0]);
-			exit(127);
+			exit(2);
 		}
 	}
 	else
 	{
-		if (waitpid(child, &status, 0) == -1)
+		wait(&status);
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
-			perror("Wait failure");
-			return (1);
-		}
-		if (WIFEXITED(status))
-		{
-			return (WEXITSTATUS(status));
-		}
-		else
-		{
-			return (1);
+			fprintf(stderr, "%s: %d: %s: not found\n", "./hsh", 1, str[0]);
 		}
 	}
-	return (0);
 }

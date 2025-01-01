@@ -25,7 +25,8 @@ int resolve_command_path(char **str)
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: 1: %s: not found\n", "./hsh", str[0]);
-		return (0);
+		free_str_array(str);
+		exit(127);
 	}
 	free(str[0]);
 	str[0] = command_path;
@@ -61,7 +62,7 @@ void free_str_array(char **str)
 int main(void)
 {
 	char *line = NULL, **str = NULL;
-	int check_builtin, exit_status = 0;
+	int check_builtin;
 
 	while (1)
 	{
@@ -79,18 +80,17 @@ int main(void)
 		{
 			continue;
 		}
-		check_builtin = get_builtin(str, environ, &exit_status);
+		check_builtin = get_builtin(str, environ);
 		if (check_builtin == 1)
 		{
 			continue;
 		}
 		if (!resolve_command_path(str))
 		{
-			exit_status = 127;
 			free_str_array(str);
 			continue;
 		}
-		exit_status = child_process(str, environ);
+		child_process(str, environ);
 		free_str_array(str);
 	}
 	return (0);
