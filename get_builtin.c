@@ -3,7 +3,7 @@
 /**
  * print_env - Prints the current environment.
  *
- * @str: A pointer to the array from strtok with the command.
+ * @environ: A pointer to the array from strtok with the command.
  *
  * Return: 0;
  */
